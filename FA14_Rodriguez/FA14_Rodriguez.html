@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"> 
+		<meta name="author" content="Shania Rodriguez"> 
+		<meta name="keywords" content="HTML, CSS, JavaScript"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title> With Fillins Sign-up </title>
+		
+	<style>
+		body {
+			background-image: url('bg-image.svg');
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			margin: 0;
+			padding: 0;
+		}
+
+		#wf {
+			font-size: 30px;
+			color: #39594D;
+			position: absolute;
+			top: 10%;
+			right: 21.5%;
+			letter-spacing: 0.1em;
+		}
+
+		#signup {
+			background-color: #EA5C2B;
+			color: white;
+			padding: 15px;
+			border: none;
+			cursor: pointer;
+			opacity: 0.8;
+			position: absolute;
+			top: 2%;
+			right: 2%;
+			width: 27%;
+			height: 8%;
+			border-radius: 100px;
+			border: 2px solid white;
+			font-size: 20px;
+			transition-duration: 0.2s;
+		}
+
+		#signup:hover {
+			background-color: #F7D1C1;
+			color: #39594D;
+			border: #EA5C2B;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="password"],
+		select,
+		textarea {
+			width: 80%;
+			height: 17%;
+			font-size: 18px;
+			padding: 3px;
+		}
+
+		input[type="submit"],
+		input[type="reset"] {
+			background-color: #39594D;
+			color: white;
+			width: 20%;
+			font-size: 20px;
+			position: relative;
+			cursor: pointer;
+			transition-duration: 0.1s;
+		}
+
+		input[type="submit"]:hover,
+		input[type="reset"]:hover {
+			background-color: white;
+			color: #39594D;
+		}
+
+		#comp {
+			width: 37%;
+			height: auto;
+			position: fixed;
+			top: 17%;
+			left: 1%;
+		}
+
+		fieldset {
+			width: 43%;
+			height: auto;
+			position: absolute;
+			right: 1.5%;
+			top: 17%;
+			font-size: 30px;
+			margin-right: 20px;
+			display: none;
+			border: 3px solid #f1f1f1;
+			z-index: 9;
+		}
+
+		#printout {
+			border: 3px solid #f1f1f1;
+			padding: 20px;
+			width: 41%;
+			height: auto;
+			position: absolute;
+			right: 2%;
+			top: 85%;
+			font-size: 30px;
+			margin-right: 25px;
+			margin-top: 50px;
+		}
+
+		#printout p {
+			margin: 10px 0;
+		}
+
+		#printout label {
+			font-weight: bold;
+			color: #EA5C2B;
+		}
+
+		#printout legend {
+			font-weight: bold;
+		}
+
+	</style>
+	</head>
+	
+	<body>	
+		<button id="signup" onclick="signUpSheet()"> Sign Up </button>
+		<h1 id="wf"> with fillins </h1>
+		<img id="comp" src="design.svg" >
+		
+		<form id="login" onsubmit="return printFieldset(event);">
+			<fieldset form="login" id="signup-form">
+				<legend> Log-in </legend>
+				<label for="name"> Name </label><br>
+				<input type="text" id="name" name="name" onfocus="onClickFocus('name')" onblur="onOutFocus('name')" required><br>
+				<label for="userName"> Username </label><br>
+				<input type="text" id="userName" name="username" onfocus="onClickFocus('userName')" onblur="onOutFocus('userName')" required><br>
+				<label for="gender"> Gender </label><br>
+				<select name="gender" id="gender" onfocus="onClickFocus('gender')" onblur="onOutFocus('gender')">
+					<option value="Male">Male</option>
+					<option value="Female" selected>Female</option>
+					<option value="Prefer Not to mention">Prefer not to mention</option>
+				</select><br>
+				<label for="password"> Password </label><br>
+				<input type="password" id="password" name="password" onfocus="onClickFocus('password')" onblur="onOutFocus('password')" required><br>
+				<label for="email"> Email Address </label><br>
+				<input type="email" id="email" name="email" onfocus="onClickFocus('email')" onblur="onOutFocus('email')" required><br>
+				<label for="address"> Address </label><br>
+				<input type="text" id="address" name="address" onfocus="onClickFocus('address')" onblur="onOutFocus('address')" required><br>
+				<label for="interest"> What are your interests? </label><br>
+				<textarea id="tArea" name="interests" rows="5" cols="50" onfocus="onClickFocus('tArea')" onblur="onOutFocus('tArea')" required></textarea>
+				
+				<input type="submit" value="Submit">
+				<input type="reset" id="clear" value="Clear" onclick="clearInfo()">
+			</fieldset>
+		</form>
+		
+			<div id="printout">
+			<legend> User Information </legend>
+			</div>
+			<div id="printout-container"></div>
+		
+		<script>
+			function onClickFocus(id) {
+				document.getElementById(id).style.border = "3px solid green";
+			}
+
+			function onOutFocus(id) {
+				var y = document.getElementById(id).value;
+				if (y == "") {
+					document.getElementById(id).style.border = "2px solid red";
+				} else {
+					document.getElementById(id).style.border = "3px solid green";
+				}
+			}
+
+			function signUpSheet() {
+				document.getElementById("signup-form").style.display = "block";
+			}
+
+			function clearInfo() {
+				document.getElementById("login").reset();
+					var inputs = document.getElementsByTagName("input");
+					var textareas = document.getElementsByTagName("textarea");
+					var selects = document.getElementsByTagName("select");
+
+				for (var i = 0; i < inputs.length; i++) {
+					inputs[i].style.border = "1px solid black";
+				}
+				for (var i = 0; i < textareas.length; i++) {
+					textareas[i].style.border = "1px solid black";
+				}	
+				for (var i = 0; i < selects.length; i++) {
+					selects[i].style.border = "1px solid black";
+				}
+
+				var printoutContainer = document.getElementById("printout-container");
+				printoutContainer.innerHTML = "";
+
+				var printout = document.getElementById("printout");
+				printout.innerHTML = "<legend> User Information </legend>"; 
+			}
+
+
+			
+			function printFieldset(event) {
+				event.preventDefault();
+				var name = document.getElementById("name").value;
+				var username = document.getElementById("userName").value;
+				var gender = document.getElementById("gender").value;
+				var password = document.getElementById("password").value;
+				var email = document.getElementById("email").value;
+				var address = document.getElementById("address").value;
+				var interest = document.getElementById("tArea").value;
+				 
+				var printoutContainer = document.getElementById("printout-container");
+				var printout = document.getElementById("printout");
+				printout.innerHTML = "<p><label>Name:</label> " + name + "</p>" +
+									  "<p><label>Username:</label> " + username + "</p>" +
+									  "<p><label>Gender:</label> " + gender + "</p>" +
+									  "<p><label>Password:</label> " + password + "</p>" +
+									  "<p><label>Email:</label> " + email + "</p>" +
+									  "<p><label>Address:</label> " + address + "</p>" +
+									  "<p><label>Interest:</label> " + interest + "</p>";				  
+			return false;
+			}
+			
+		</script>
+	</body>
+</html>
